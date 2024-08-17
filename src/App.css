@@ -1,38 +1,367 @@
 .App {
-  text-align: center;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 0.5s ease-in-out;
+    color: #ffffff;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.bg-overlay00 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.common-body {
+    background-color: #00283f59;
+    border: solid 1px #ffffff1a;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.weatherbox {
+    max-width: 700px !important;
 }
 
-.App-link {
-  color: #61dafb;
+@media (max-width: 768px) {
+    .container {
+        padding: 0 10px;
+    }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/*스피너*/
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+}
+
+
+/*웨더 박스*/
+.weather-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.weather-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.weather-header h2 {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.weather-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.temperature {
+    text-align: center;
+    font-size: 2em;
+}
+
+.temperature h1 {
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.temperature h1 span {
+    font-size: 0.5em;
+    margin-left: 20px;
+    color: #ffffff9c;
+}
+
+.weather-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.weather-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.weather-item span {
+    margin: 0 10px;
+}
+
+.weather-item svg {
+    margin-right: 10px;
+}
+
+/*웨더 아이템*/
+.weather-add {
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.hourly-forecast {
+    display: flex;
+    justify-content: space-between;
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+
+.hourly-item {
+    flex: 0 0 auto;
+    text-align: center;
+    margin-right: 20px;
+    /* border: solid 1px #ffffff41; */
+}
+
+.hourly-item:last-child {
+    margin-right: 0;
+}
+
+.weather-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.weather-detail-item {
+    text-align: center;
+}
+
+.weather-detail-item svg {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .weather-details {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+
+.button-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+
+.card {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-group {
+    margin-bottom: 20px;
+}
+
+.btn {
+    border: var(--bs-btn-border-width) solid #e7e7e72c !important;
+}
+
+
+/*Search.css*/
+.search-container {
+    display: block;
+    /* show 상태에 따라 변경 필요 */
+    width: 40%;
+    height: 100vh;
+    position: fixed;
+    right: 0;
+    top: 0;
+    background-color: #fff;
+    color: #000000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    transition: transform 1s ease;
+}
+
+.search-header {
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-header h5 {
+    margin: 0;
+}
+
+.close-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.search-body {
+    padding: 20px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.suggestion-item {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.suggestion-item:hover {
+    background-color: #f0f0f0;
+    /* hover 시 배경색 변화 */
+}
+
+.search-button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/*WeatherAdd2 CSS*/
+.weather-forecast {
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.forecast-list {
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+}
+
+.forecast-item {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    margin: 0 10px;
+}
+
+.forecast-item img {
+    width: 50px;
+    height: 50px;
+}
+
+.forecast-item p {
+    margin: 5px 0;
+}
+
+.forecast-item svg {
+    margin-right: 5px;
+}
+
+/*WeatherTip.css*/
+.weather-tip {
+    border-radius: 4px;
+    padding: 20px;
+    color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #00283f59;
+    border: solid 1px #ffffff1a;
+}
+
+.weather-tip h2 {
+    margin: 0 0 10px;
+    font-size: 1.5em;
+}
+
+.weather-tip p {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+/*sunrise-sunset*/
+.sunrise-sunset {
+    padding: 20px 0;
+}
+
+.sun-graph {
+    position: relative;
+    height: 100px;
+    background: linear-gradient(to bottom, #2b2e30, #487385);
+    border-radius: 100px 100px 0 0;
+    overflow: hidden;
+}
+
+.sun-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    background: linear-gradient(to top, #FFD700, #FFA500);
+    border-radius: 0 100px 0 0;
+}
+
+.sun-icon {
+    position: absolute;
+    bottom: 0px;
+    transform: translateX(-50%);
+    color: #ff8800;
+    font-size: 24px;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 0, 0.7));
+}
+
+.time-labels {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.city-sunrise-icon {
+    color: #ff8800;
+}
+
+.city-sunset-icon {
+    color: #949494;
+}
+
+.time-labels span {
+    font-size: 14px;
+}
+
+.sunset-time {
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+    z-index: 10;
+    color: #000000;
+}
+
+.sunset-time p {
+    position: absolute;
+    bottom: -15px;
+    left: -185px;
+    z-index: 100;
+    background-color: #f0f0f080;
+    border-radius: 10px;
+    padding: 0 10px;
 }
