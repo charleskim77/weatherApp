@@ -181,7 +181,7 @@
 .search-container {
     display: block;
     /* show 상태에 따라 변경 필요 */
-    width: 40%;
+    width: 80%;
     height: 100vh;
     position: fixed;
     right: 0;
