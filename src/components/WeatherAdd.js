@@ -29,6 +29,16 @@ const WeatherAdd = ({ weather }) => {
   const hoursUntilSunset = Math.floor(timeUntilSunset / (1000 * 60 * 60));
   const minutesUntilSunset = Math.floor((timeUntilSunset % (1000 * 60 * 60)) / (1000 * 60));
 
+  // 일출 후 3시간 이상 지났는지 확인
+  const threeHoursAfterSunrise = new Date(citySunrise.getTime() + 3 * 60 * 60 * 1000);
+  const isMoreThanThreeHoursAfterSunrise = cityNow > threeHoursAfterSunrise;
+
+  // 현재 시간이 일몰 이전인지 확인
+  const isBeforeSunset = cityNow < citySunset;
+
+  // 일몰 시간 표시 조건
+  const showSunsetTime = isMoreThanThreeHoursAfterSunrise && isBeforeSunset;
+
   const formatTime = (date) => {
     return date.toLocaleTimeString('ko-KR', {
       hour: '2-digit',
@@ -70,7 +80,7 @@ const WeatherAdd = ({ weather }) => {
           <div className="sun-graph">
             <div className="sun-progress" style={{ width: `${currentTimePercentage}%` }}></div>
             <FontAwesomeIcon icon={faSun} className="sun-icon" style={{ left: `${currentTimePercentage}%` }} />
-            {(hoursUntilSunset > 2 || (hoursUntilSunset === 2 && minutesUntilSunset > 0)) && (
+            {showSunsetTime && (
               <span className='sunset-time' style={{ left: `${currentTimePercentage}%` }}>
                 <p>일몰까지: {hoursUntilSunset}시간 {minutesUntilSunset}분</p>
               </span>
