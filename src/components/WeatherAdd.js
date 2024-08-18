@@ -75,7 +75,7 @@ const WeatherAdd = ({ weather }) => {
       </div>
 
       <div className="weather-add common-body mb-4">
-        <h3>일출 - 일몰</h3>
+        <h3>일출, 일몰 시간</h3>
         <div className="sunrise-sunset">
           <div className="sun-graph">
             <div className="sun-progress" style={{ width: `${currentTimePercentage}%` }}></div>
